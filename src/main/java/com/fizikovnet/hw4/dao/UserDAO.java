@@ -1,7 +1,6 @@
 package com.fizikovnet.hw4.dao;
 
 import com.fizikovnet.hw4.entity.User;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -12,7 +11,7 @@ import java.util.List;
 @Repository
 public class UserDAO {
 
-    private Connection connection;
+    private final Connection connection;
 
     public UserDAO(DataSource dataSource) throws SQLException {
         this.connection = dataSource.getConnection();
