@@ -1,4 +1,4 @@
-package com.fizikovnet.hw4.entity;
+package com.fizikovnet.hw.entity;
 
 public class User {
 

@@ -1,4 +1,4 @@
-package com.fizikovnet.hw4.config;
+package com.fizikovnet.hw.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;

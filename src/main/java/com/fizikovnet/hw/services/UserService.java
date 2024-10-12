@@ -1,7 +1,7 @@
-package com.fizikovnet.hw4.services;
+package com.fizikovnet.hw.services;
 
-import com.fizikovnet.hw4.dao.UserDAO;
-import com.fizikovnet.hw4.entity.User;
+import com.fizikovnet.hw.dao.UserDAO;
+import com.fizikovnet.hw.entity.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

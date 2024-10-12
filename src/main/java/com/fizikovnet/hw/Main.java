@@ -1,7 +1,7 @@
-package com.fizikovnet.hw4;
+package com.fizikovnet.hw;
 
-import com.fizikovnet.hw4.entity.User;
-import com.fizikovnet.hw4.services.UserService;
+import com.fizikovnet.hw.entity.User;
+import com.fizikovnet.hw.services.UserService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 

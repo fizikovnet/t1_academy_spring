@@ -1,6 +1,6 @@
-package com.fizikovnet.hw4.dao;
+package com.fizikovnet.hw.dao;
 
-import com.fizikovnet.hw4.entity.User;
+import com.fizikovnet.hw.entity.User;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
