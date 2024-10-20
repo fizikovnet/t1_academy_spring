@@ -13,6 +13,13 @@
   <artifactId>t1_academy_spring</artifactId>
   <version>1.0-SNAPSHOT</version>
 
+  <packaging>pom</packaging>
+
+  <modules>
+    <module>payment_core</module>
+    <module>product_service</module>
+  </modules>
+
   <dependencies>
     <dependency>
       <groupId>org.postgresql</groupId>
@@ -34,4 +41,5 @@
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
   </dependencies>
+
 </project>

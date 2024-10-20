@@ -30,11 +30,11 @@ public class ProductService {
         productDAO.create(product);
     }
 
-    public void update(Product product) {
+    public int update(Product product) {
         if (product.getId() == null) {
             throw new RuntimeException("User should have id!");
         }
-        productDAO.update(product);
+        return productDAO.update(product);
     }
 
     public void delete(Product product) {
