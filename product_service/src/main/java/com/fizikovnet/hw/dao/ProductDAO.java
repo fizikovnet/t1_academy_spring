@@ -67,11 +67,12 @@ public class ProductDAO {
     public int update(Product product) {
         try {
             PreparedStatement statement = connection.prepareStatement(
-                    "update products set account_number = ? and balance = ? and type = ? where id = ?"
+                    "update products set account_number = ?, balance = ?, type = ? where id = ?"
             );
             statement.setInt(1, product.getAccountNumber());
             statement.setDouble(2, product.getBalance());
             statement.setString(3, product.getType());
+            statement.setLong(4, product.getId());
             return statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
