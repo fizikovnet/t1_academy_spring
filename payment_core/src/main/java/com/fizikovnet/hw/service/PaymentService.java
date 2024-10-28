@@ -5,12 +5,16 @@ import com.fizikovnet.hw.dto.Product;
 import com.fizikovnet.hw.dto.ResponseDTO;
 import com.fizikovnet.hw.exception.NotEnoughBalanceException;
 import com.fizikovnet.hw.exception.ProductNotFoundException;
+import com.fizikovnet.hw.exception.UserNotFoundException;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
+import java.text.MessageFormat;
 import java.util.List;
+
+import static java.text.MessageFormat.format;
 
 @Service
 public class PaymentService {
@@ -21,14 +25,17 @@ public class PaymentService {
         this.restClient = restClient;
     }
 
-    public List<Product> getProductsByUserId(Integer userId) {
+    public List<Product> getProductsByUserId(Long userId) {
         return restClient.get()
                 .uri("/user/" + userId)
                 .retrieve()
+                .onStatus(status -> status.value() == 404, (request, response) -> {
+                    throw new UserNotFoundException(format("User with id {0} not found", userId));
+                })
                 .body(new ParameterizedTypeReference<>() {});
     }
 
-    public int execute(Payment payment) {
+    public void execute(Payment payment) {
         Product product = restClient.get()
                 .uri("/" + payment.getProductId())
                 .retrieve()
@@ -49,13 +56,11 @@ public class PaymentService {
             product.setBalance(product.getBalance() + payment.getSumma());
         }
 
-        Integer result = restClient.put()
-                .uri("http://localhost:8080/api/products/update")
+        restClient.put()
+                .uri("/update")
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(product)
                 .retrieve()
                 .body(Integer.class);
-
-        return result;
     }
 }

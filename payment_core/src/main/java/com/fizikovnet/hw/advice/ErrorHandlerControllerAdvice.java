@@ -3,6 +3,7 @@ package com.fizikovnet.hw.advice;
 import com.fizikovnet.hw.dto.ResponseDTO;
 import com.fizikovnet.hw.exception.NotEnoughBalanceException;
 import com.fizikovnet.hw.exception.ProductNotFoundException;
+import com.fizikovnet.hw.exception.UserNotFoundException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +20,9 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 public class ErrorHandlerControllerAdvice {
 
-    @ExceptionHandler(ProductNotFoundException.class)
+    @ExceptionHandler({ProductNotFoundException.class, UserNotFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseDTO<String> handleNotFoundError(ProductNotFoundException ex) {
+    public ResponseDTO<String> handleNotFoundError(Exception ex) {
         return new ResponseDTO<>(HttpStatus.NOT_FOUND.value(), ex.getMessage());
     }
 

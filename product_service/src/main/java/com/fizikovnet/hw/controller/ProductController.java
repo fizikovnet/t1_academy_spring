@@ -18,7 +18,7 @@ public class ProductController {
     }
 
     @GetMapping("/user/{userId}")
-    public List<Product> getProductByUserId(@PathVariable("userId") Integer userId) {
+    public List<Product> getProductByUserId(@PathVariable("userId") Long userId) {
         return productService.findAllByUserId(userId);
     }
 
@@ -28,8 +28,8 @@ public class ProductController {
     }
 
     @PutMapping("/update")
-    private int updateProduct(@RequestBody Product product) {
-        return productService.update(product);
+    private void updateProduct(@RequestBody Product product) {
+        productService.update(product);
     }
 
 }
