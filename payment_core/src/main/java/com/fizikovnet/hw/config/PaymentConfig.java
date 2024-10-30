@@ -8,7 +8,7 @@ import org.springframework.web.client.RestClient;
 @Configuration
 public class PaymentConfig {
 
-    private final String PRODUCT_SERVICE_URL = "http://localhost:8081/api/products";
+    private final String PRODUCT_SERVICE_URL = "http://localhost:8080/api/products";
 
     @Bean
     public RestClient restClient() {

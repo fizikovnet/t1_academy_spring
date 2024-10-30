@@ -7,11 +7,14 @@ public class Product {
     private Double balance;
     private String type;
 
-    public Product(Long id, Integer accountNumber, Double balance, String type) {
+    private User user;
+
+    public Product(Long id, Integer accountNumber, Double balance, String type, User user) {
         this.id = id;
         this.accountNumber = accountNumber;
         this.balance = balance;
         this.type = type;
+        this.user = user;
     }
 
     public Long getId() {
@@ -34,6 +37,14 @@ public class Product {
         this.balance = balance;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -41,6 +52,9 @@ public class Product {
                 ", accountNumber=" + accountNumber +
                 ", balance=" + balance +
                 ", type=" + type +
+                ", user=" + user +
                 '}';
     }
+
+
 }

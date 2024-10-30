@@ -1,42 +1,32 @@
 package com.fizikovnet.hw.entity;
 
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
+@Entity
+@Table(name = "products")
 public class Product {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "account_number")
     private Integer accountNumber;
+
+    @Column(name = "balance")
     private Double balance;
+
+    @Column(name = "type")
     private String type;
 
-    public Product(Long id, Integer accountNumber, Double balance, String type) {
-        this.id = id;
-        this.accountNumber = accountNumber;
-        this.balance = balance;
-        this.type = type;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public Integer getAccountNumber() {
-        return accountNumber;
-    }
-
-    public Double getBalance() {
-        return balance;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", accountNumber=" + accountNumber +
-                ", balance=" + balance +
-                ", type=" + type +
-                '}';
-    }
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User user;
 }

@@ -21,15 +21,14 @@ public class PaymentController {
     }
 
     @GetMapping("/products-by-user/{userId}")
-    public ResponseDTO<List<Product>> getProductsByUser(@PathVariable("userId") Integer userId) {
+    public ResponseDTO<List<Product>> getProductsByUser(@PathVariable("userId") Long userId) {
         return new ResponseDTO<>(HttpStatus.OK.value(), paymentService.getProductsByUserId(userId));
     }
 
     @PostMapping("/execute")
     public ResponseDTO<String> executePayment(@RequestBody @Valid Payment payment) {
-        return paymentService.execute(payment) == 1 ?
-                new ResponseDTO<>(HttpStatus.OK.value(), "Successfully updated") :
-                new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "Failure updated");
+        paymentService.execute(payment);
+        return new ResponseDTO<>(HttpStatus.OK.value(), "Successfully updated");
     }
 
 }
