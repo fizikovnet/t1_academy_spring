@@ -12,31 +12,28 @@ import java.math.BigDecimal;
 @RequestMapping("/api/limits")
 public class LimitController {
 
-    private LimitService limitService;
+    private final LimitService limitService;
 
     public LimitController(LimitService limitService) {
         this.limitService = limitService;
     }
 
     @GetMapping("/{clientId}")
-    public ResponseEntity<Limit> getLimit(@PathVariable Integer clientId) {
-        Limit limit = limitService.getOrCreateClientLimit(clientId);
-        return ResponseEntity.ok(limit);
+    public Limit getLimit(@PathVariable Integer clientId) {
+        return limitService.getOrCreateClientLimit(clientId);
     }
 
     @PostMapping("/{clientId}/payment")
-    public ResponseEntity<String> processPayment(@PathVariable Integer clientId, @RequestParam BigDecimal amount) {
-        boolean success = limitService.processPayment(clientId, amount);
-        if (success) {
-            return ResponseEntity.ok("Payment processed");
-        } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Insufficient limit");
-        }
+    public String processPayment(@PathVariable Integer clientId, @RequestParam BigDecimal amount) {
+        limitService.processPayment(clientId, amount);
+
+        return "Payment processed";
     }
 
     @PostMapping("/{clientId}/restore")
-    public ResponseEntity<String> restoreLimit(@PathVariable Integer clientId, @RequestParam BigDecimal amount) {
+    public String restoreLimit(@PathVariable Integer clientId, @RequestParam BigDecimal amount) {
         limitService.restoreLimit(clientId, amount);
-        return ResponseEntity.ok("Limit restored");
+
+        return "Limit restored";
     }
 }
